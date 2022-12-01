@@ -80,7 +80,7 @@ func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName
 		mod:         moduleName,
 		typeDetails: typeDetails,
 	}
-	typeName := mod.typeString(t, input, false /*acceptMapping*/)
+	typeName := mod.typeString(t, input, false /*acceptMapping*/, false /*forDict*/)
 
 	// Remove any package qualifiers from the type name.
 	if !input {
@@ -118,7 +118,7 @@ func (d DocLanguageHelper) GetMethodResultName(pkg *schema.Package, modName stri
 				mod:         modName,
 				typeDetails: typeDetails,
 			}
-			return mod.typeString(m.Function.Outputs.Properties[0].Type, false, false)
+			return mod.typeString(m.Function.Outputs.Properties[0].Type, false, false, false /*forDict*/)
 		}
 	}
 	return fmt.Sprintf("%s.%sResult", resourceName(r), title(d.GetMethodName(m)))
