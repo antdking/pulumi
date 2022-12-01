@@ -7,12 +7,21 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 
 __all__ = [
     'Foo',
     'FooArgs',
 ]
+
+class FooDict(TypedDict):
+    a: Required[bool]
+    c: Required[int]
+    e: Required[str]
+    b: NotRequired[Optional[bool]]
+    d: NotRequired[Optional[int]]
+    f: NotRequired[Optional[str]]
 
 @pulumi.input_type
 class Foo:
@@ -87,6 +96,14 @@ class Foo:
     def f(self, value: Optional[str]):
         pulumi.set(self, "f", value)
 
+
+class FooArgsDict(TypedDict):
+    a: Required[bool]
+    c: Required[int]
+    e: Required[str]
+    b: NotRequired[Optional[bool]]
+    d: NotRequired[Optional[int]]
+    f: NotRequired[Optional[str]]
 
 @pulumi.input_type
 class FooArgs:

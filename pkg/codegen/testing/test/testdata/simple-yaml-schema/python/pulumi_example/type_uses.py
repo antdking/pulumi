@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from . import outputs
 from ._enums import *
@@ -76,9 +77,9 @@ class TypeUses(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 bar: Optional[pulumi.Input[pulumi.InputType['SomeOtherObjectArgs']]] = None,
-                 baz: Optional[pulumi.Input[pulumi.InputType['ObjectWithNodeOptionalInputsArgs']]] = None,
-                 foo: Optional[pulumi.Input[pulumi.InputType['ObjectArgs']]] = None,
+                 bar: Optional[pulumi.Input[Union['SomeOtherObjectArgs', 'SomeOtherObjectArgsDict']]] = None,
+                 baz: Optional[pulumi.Input[Union['ObjectWithNodeOptionalInputsArgs', 'ObjectWithNodeOptionalInputsArgsDict']]] = None,
+                 foo: Optional[pulumi.Input[Union['ObjectArgs', 'ObjectArgsDict']]] = None,
                  qux: Optional[pulumi.Input['RubberTreeVariety']] = None,
                  __props__=None):
         """
@@ -109,9 +110,9 @@ class TypeUses(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 bar: Optional[pulumi.Input[pulumi.InputType['SomeOtherObjectArgs']]] = None,
-                 baz: Optional[pulumi.Input[pulumi.InputType['ObjectWithNodeOptionalInputsArgs']]] = None,
-                 foo: Optional[pulumi.Input[pulumi.InputType['ObjectArgs']]] = None,
+                 bar: Optional[pulumi.Input[Union['SomeOtherObjectArgs', 'SomeOtherObjectArgsDict']]] = None,
+                 baz: Optional[pulumi.Input[Union['ObjectWithNodeOptionalInputsArgs', 'ObjectWithNodeOptionalInputsArgsDict']]] = None,
+                 foo: Optional[pulumi.Input[Union['ObjectArgs', 'ObjectArgsDict']]] = None,
                  qux: Optional[pulumi.Input['RubberTreeVariety']] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)

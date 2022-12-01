@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from ... import _utilities
 from ... import _enums as _root_enums
 from ... import _inputs as _root_inputs
@@ -116,7 +117,7 @@ class RubberTree(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 container: Optional[pulumi.Input[pulumi.InputType['_root_inputs.ContainerArgs']]] = None,
+                 container: Optional[pulumi.Input[Union['_root_inputs.ContainerArgs', '_root_inputs.ContainerArgsDict']]] = None,
                  diameter: Optional[pulumi.Input['Diameter']] = None,
                  farm: Optional[pulumi.Input[Union['Farm', str]]] = None,
                  size: Optional[pulumi.Input['TreeSize']] = None,
@@ -150,7 +151,7 @@ class RubberTree(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 container: Optional[pulumi.Input[pulumi.InputType['_root_inputs.ContainerArgs']]] = None,
+                 container: Optional[pulumi.Input[Union['_root_inputs.ContainerArgs', '_root_inputs.ContainerArgsDict']]] = None,
                  diameter: Optional[pulumi.Input['Diameter']] = None,
                  farm: Optional[pulumi.Input[Union['Farm', str]]] = None,
                  size: Optional[pulumi.Input['TreeSize']] = None,

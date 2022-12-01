@@ -7,12 +7,22 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 import pulumi_random
 
 __all__ = [
     'PetArgs',
 ]
+
+class PetArgsDict(TypedDict):
+    required_name: Required[pulumi.Input['pulumi_random.RandomPet']]
+    required_name_array: Required[pulumi.Input[Sequence[pulumi.Input['pulumi_random.RandomPet']]]]
+    required_name_map: Required[pulumi.Input[Mapping[str, pulumi.Input['pulumi_random.RandomPet']]]]
+    age: NotRequired[Optional[pulumi.Input[int]]]
+    name: NotRequired[Optional[pulumi.Input['pulumi_random.RandomPet']]]
+    name_array: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_random.RandomPet']]]]]
+    name_map: NotRequired[Optional[pulumi.Input[Mapping[str, pulumi.Input['pulumi_random.RandomPet']]]]]
 
 @pulumi.input_type
 class PetArgs:

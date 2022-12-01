@@ -7,12 +7,20 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from .. import _utilities
 from .. import mod1 as _mod1
 
 __all__ = [
     'TypArgs',
 ]
+
+class TypArgsDict(TypedDict):
+    """
+    A test for namespaces (mod 2)
+    """
+    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgs']]]
+    val: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class TypArgs:

@@ -7,11 +7,15 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 
 __all__ = [
     'TopLevelArgs',
 ]
+
+class TopLevelArgsDict(TypedDict):
+    buzz: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class TopLevelArgs:

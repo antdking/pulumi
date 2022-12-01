@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from .. import _utilities
 import pulumi_google_native
 
@@ -37,7 +38,7 @@ class IamResource(pulumi.ComponentResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config: Optional[pulumi.Input[pulumi.InputType['pulumi_google_native.iam.v1.AuditConfigArgs']]] = None,
+                 config: Optional[pulumi.Input[Union['pulumi_google_native.iam.v1.AuditConfigArgs', 'pulumi_google_native.iam.v1.AuditConfigArgs']]] = None,
                  __props__=None):
         """
         Create a IamResource resource with the given unique name, props, and options.
@@ -67,7 +68,7 @@ class IamResource(pulumi.ComponentResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config: Optional[pulumi.Input[pulumi.InputType['pulumi_google_native.iam.v1.AuditConfigArgs']]] = None,
+                 config: Optional[pulumi.Input[Union['pulumi_google_native.iam.v1.AuditConfigArgs', 'pulumi_google_native.iam.v1.AuditConfigArgs']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

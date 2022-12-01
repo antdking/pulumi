@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from ._enums import *
 
@@ -17,6 +18,13 @@ __all__ = [
     'FilterableProperty',
     'HierarchyInformation',
 ]
+
+class ConfigurationFiltersDict(TypedDict):
+    """
+    Configuration filters
+    """
+    hierarchy_information: Required['HierarchyInformation']
+    filterable_property: NotRequired[Optional[Sequence['FilterableProperty']]]
 
 @pulumi.input_type
 class ConfigurationFilters:
@@ -56,6 +64,14 @@ class ConfigurationFilters:
     def filterable_property(self, value: Optional[Sequence['FilterableProperty']]):
         pulumi.set(self, "filterable_property", value)
 
+
+class CustomerSubscriptionDetailsDict(TypedDict):
+    """
+    Holds Customer subscription details. Clients can display available products to unregistered customers by explicitly passing subscription details
+    """
+    quota_id: Required[str]
+    location_placement_id: NotRequired[Optional[str]]
+    registered_features: NotRequired[Optional[Sequence['CustomerSubscriptionRegisteredFeatures']]]
 
 @pulumi.input_type
 class CustomerSubscriptionDetails:
@@ -112,6 +128,13 @@ class CustomerSubscriptionDetails:
         pulumi.set(self, "registered_features", value)
 
 
+class CustomerSubscriptionRegisteredFeaturesDict(TypedDict):
+    """
+    Represents subscription registered features
+    """
+    name: NotRequired[Optional[str]]
+    state: NotRequired[Optional[str]]
+
 @pulumi.input_type
 class CustomerSubscriptionRegisteredFeatures:
     def __init__(__self__, *,
@@ -152,6 +175,13 @@ class CustomerSubscriptionRegisteredFeatures:
         pulumi.set(self, "state", value)
 
 
+class FilterablePropertyDict(TypedDict):
+    """
+    Different types of filters supported and its values.
+    """
+    supported_values: Required[Sequence[str]]
+    type: Required[Union[str, 'SupportedFilterTypes']]
+
 @pulumi.input_type
 class FilterableProperty:
     def __init__(__self__, *,
@@ -189,6 +219,15 @@ class FilterableProperty:
     def type(self, value: Union[str, 'SupportedFilterTypes']):
         pulumi.set(self, "type", value)
 
+
+class HierarchyInformationDict(TypedDict):
+    """
+    Holds details about product hierarchy information
+    """
+    configuration_name: NotRequired[Optional[str]]
+    product_family_name: NotRequired[Optional[str]]
+    product_line_name: NotRequired[Optional[str]]
+    product_name: NotRequired[Optional[str]]
 
 @pulumi.input_type
 class HierarchyInformation:

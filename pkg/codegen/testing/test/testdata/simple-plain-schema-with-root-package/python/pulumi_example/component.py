@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -133,13 +134,13 @@ class Component(pulumi.ComponentResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  a: Optional[bool] = None,
                  b: Optional[bool] = None,
-                 bar: Optional[pulumi.InputType['FooArgs']] = None,
-                 baz: Optional[Sequence[pulumi.Input[pulumi.InputType['FooArgs']]]] = None,
+                 bar: Optional[Union['FooArgs', 'FooArgsDict']] = None,
+                 baz: Optional[Sequence[pulumi.Input[Union['FooArgs', 'FooArgsDict']]]] = None,
                  c: Optional[int] = None,
                  d: Optional[int] = None,
                  e: Optional[str] = None,
                  f: Optional[str] = None,
-                 foo: Optional[pulumi.Input[pulumi.InputType['FooArgs']]] = None,
+                 foo: Optional[pulumi.Input[Union['FooArgs', 'FooArgsDict']]] = None,
                  __props__=None):
         """
         Create a Component resource with the given unique name, props, and options.
@@ -171,13 +172,13 @@ class Component(pulumi.ComponentResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  a: Optional[bool] = None,
                  b: Optional[bool] = None,
-                 bar: Optional[pulumi.InputType['FooArgs']] = None,
-                 baz: Optional[Sequence[pulumi.Input[pulumi.InputType['FooArgs']]]] = None,
+                 bar: Optional[Union['FooArgs', 'FooArgsDict']] = None,
+                 baz: Optional[Sequence[pulumi.Input[Union['FooArgs', 'FooArgsDict']]]] = None,
                  c: Optional[int] = None,
                  d: Optional[int] = None,
                  e: Optional[str] = None,
                  f: Optional[str] = None,
-                 foo: Optional[pulumi.Input[pulumi.InputType['FooArgs']]] = None,
+                 foo: Optional[pulumi.Input[Union['FooArgs', 'FooArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

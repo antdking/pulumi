@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from ._inputs import *
 import pulumi_aws
@@ -53,7 +54,7 @@ class StaticPage(pulumi.ComponentResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 foo: Optional[pulumi.InputType['FooArgs']] = None,
+                 foo: Optional[Union['FooArgs', 'FooArgsDict']] = None,
                  index_content: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -85,7 +86,7 @@ class StaticPage(pulumi.ComponentResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 foo: Optional[pulumi.InputType['FooArgs']] = None,
+                 foo: Optional[Union['FooArgs', 'FooArgsDict']] = None,
                  index_content: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)

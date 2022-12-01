@@ -7,12 +7,19 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from ._enums import *
 
 __all__ = [
     'ContainerArgs',
 ]
+
+class ContainerArgsDict(TypedDict):
+    size: Required[pulumi.Input['ContainerSize']]
+    brightness: NotRequired[Optional[pulumi.Input['ContainerBrightness']]]
+    color: NotRequired[Optional[pulumi.Input[Union['ContainerColor', str]]]]
+    material: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class ContainerArgs:

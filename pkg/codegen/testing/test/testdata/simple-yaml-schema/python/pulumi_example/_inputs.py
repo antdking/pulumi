@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from ._enums import *
 from .resource import Resource
@@ -17,6 +18,9 @@ __all__ = [
     'ObjectArgs',
     'SomeOtherObjectArgs',
 ]
+
+class ConfigMapArgsDict(TypedDict):
+    config: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class ConfigMapArgs:
@@ -34,6 +38,10 @@ class ConfigMapArgs:
     def config(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "config", value)
 
+
+class ObjectWithNodeOptionalInputsArgsDict(TypedDict):
+    foo: Required[pulumi.Input[str]]
+    bar: NotRequired[Optional[pulumi.Input[int]]]
 
 @pulumi.input_type
 class ObjectWithNodeOptionalInputsArgs:
@@ -62,6 +70,13 @@ class ObjectWithNodeOptionalInputsArgs:
     def bar(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "bar", value)
 
+
+class ObjectArgsDict(TypedDict):
+    bar: NotRequired[Optional[pulumi.Input[str]]]
+    configs: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['ConfigMapArgs']]]]]
+    foo: NotRequired[Optional[pulumi.Input['Resource']]]
+    others: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgs']]]]]]]
+    still_others: NotRequired[Optional[pulumi.Input[Mapping[str, pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgs']]]]]]]
 
 @pulumi.input_type
 class ObjectArgs:
@@ -137,6 +152,9 @@ class ObjectArgs:
     def still_others(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgs']]]]]]):
         pulumi.set(self, "still_others", value)
 
+
+class SomeOtherObjectArgsDict(TypedDict):
+    baz: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class SomeOtherObjectArgs:

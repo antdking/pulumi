@@ -7,11 +7,15 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 
 __all__ = [
     'FooArgs',
 ]
+
+class FooArgsDict(TypedDict):
+    a: NotRequired[Optional[pulumi.Input[bool]]]
 
 @pulumi.input_type
 class FooArgs:

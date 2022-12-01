@@ -7,11 +7,16 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 
 __all__ = [
     'GetAmiIdsFilterArgs',
 ]
+
+class GetAmiIdsFilterArgsDict(TypedDict):
+    name: Required[str]
+    values: Required[Sequence[str]]
 
 @pulumi.input_type
 class GetAmiIdsFilterArgs:

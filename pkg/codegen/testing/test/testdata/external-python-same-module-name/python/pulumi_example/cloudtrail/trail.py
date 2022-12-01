@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from .. import _utilities
 import pulumi_aws
 
@@ -49,7 +50,7 @@ class Trail(pulumi.ComponentResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 advanced_event_selectors: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs']]]]] = None,
+                 advanced_event_selectors: Optional[pulumi.Input[Sequence[pulumi.Input[Union['pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs', 'pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs']]]]] = None,
                  trail: Optional[pulumi.Input['pulumi_aws.cloudtrail.Trail']] = None,
                  __props__=None):
         """
@@ -80,7 +81,7 @@ class Trail(pulumi.ComponentResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 advanced_event_selectors: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs']]]]] = None,
+                 advanced_event_selectors: Optional[pulumi.Input[Sequence[pulumi.Input[Union['pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs', 'pulumi_aws.cloudtrail.TrailAdvancedEventSelectorArgs']]]]] = None,
                  trail: Optional[pulumi.Input['pulumi_aws.cloudtrail.Trail']] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)

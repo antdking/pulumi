@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -92,9 +93,9 @@ class Resource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config: Optional[pulumi.Input[pulumi.InputType['ConfigArgs']]] = None,
-                 config_array: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigArgs']]]]] = None,
-                 config_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[pulumi.InputType['ConfigArgs']]]]] = None,
+                 config: Optional[pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]] = None,
+                 config_array: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]]]] = None,
+                 config_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]]]] = None,
                  foo: Optional[pulumi.Input[str]] = None,
                  foo_array: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  foo_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -127,9 +128,9 @@ class Resource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 config: Optional[pulumi.Input[pulumi.InputType['ConfigArgs']]] = None,
-                 config_array: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigArgs']]]]] = None,
-                 config_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[pulumi.InputType['ConfigArgs']]]]] = None,
+                 config: Optional[pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]] = None,
+                 config_array: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]]]] = None,
+                 config_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ConfigArgs', 'ConfigArgsDict']]]]] = None,
                  foo: Optional[pulumi.Input[str]] = None,
                  foo_array: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  foo_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,

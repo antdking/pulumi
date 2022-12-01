@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from . import _utilities
 from . import mod1 as _mod1
 from . import mod2 as _mod2
@@ -18,6 +19,14 @@ __all__ = [
     'LayeredTypeArgs',
     'TypArgs',
 ]
+
+class HelmReleaseSettingsDict(TypedDict):
+    """
+    BETA FEATURE - Options to configure the Helm Release resource.
+    """
+    required_arg: Required[str]
+    driver: NotRequired[Optional[str]]
+    plugins_path: NotRequired[Optional[str]]
 
 @pulumi.input_type
 class HelmReleaseSettings:
@@ -78,6 +87,14 @@ class HelmReleaseSettings:
         pulumi.set(self, "plugins_path", value)
 
 
+class HelmReleaseSettingsArgsDict(TypedDict):
+    """
+    BETA FEATURE - Options to configure the Helm Release resource.
+    """
+    required_arg: Required[pulumi.Input[str]]
+    driver: NotRequired[Optional[pulumi.Input[str]]]
+    plugins_path: NotRequired[Optional[pulumi.Input[str]]]
+
 @pulumi.input_type
 class HelmReleaseSettingsArgs:
     def __init__(__self__, *,
@@ -137,6 +154,14 @@ class HelmReleaseSettingsArgs:
         pulumi.set(self, "plugins_path", value)
 
 
+class KubeClientSettingsArgsDict(TypedDict):
+    """
+    Options for tuning the Kubernetes client used by a Provider.
+    """
+    burst: NotRequired[Optional[pulumi.Input[int]]]
+    qps: NotRequired[Optional[pulumi.Input[float]]]
+    rec_test: NotRequired[Optional[pulumi.Input['KubeClientSettingsArgs']]]
+
 @pulumi.input_type
 class KubeClientSettingsArgs:
     def __init__(__self__, *,
@@ -192,6 +217,17 @@ class KubeClientSettingsArgs:
     def rec_test(self, value: Optional[pulumi.Input['KubeClientSettingsArgs']]):
         pulumi.set(self, "rec_test", value)
 
+
+class LayeredTypeArgsDict(TypedDict):
+    """
+    Make sure that defaults propagate through types
+    """
+    other: Required[pulumi.Input['HelmReleaseSettingsArgs']]
+    thinker: Required[pulumi.Input[str]]
+    answer: NotRequired[Optional[pulumi.Input[float]]]
+    plain_other: NotRequired[Optional['HelmReleaseSettingsArgs']]
+    question: NotRequired[Optional[pulumi.Input[str]]]
+    recursive: NotRequired[Optional[pulumi.Input['LayeredTypeArgs']]]
 
 @pulumi.input_type
 class LayeredTypeArgs:
@@ -292,6 +328,14 @@ class LayeredTypeArgs:
     def recursive(self, value: Optional[pulumi.Input['LayeredTypeArgs']]):
         pulumi.set(self, "recursive", value)
 
+
+class TypArgsDict(TypedDict):
+    """
+    A test for namespaces (mod main)
+    """
+    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgs']]]
+    mod2: NotRequired[Optional[pulumi.Input['_mod2.TypArgs']]]
+    val: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type
 class TypArgs:

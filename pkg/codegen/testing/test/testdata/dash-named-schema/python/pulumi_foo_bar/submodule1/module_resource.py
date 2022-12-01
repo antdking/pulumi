@@ -7,6 +7,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing_extensions import NotRequired, Required, TypedDict
 from .. import _utilities
 from .. import _inputs as _root_inputs
 from .. import outputs as _root_outputs
@@ -38,7 +39,7 @@ class ModuleResource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 thing: Optional[pulumi.Input[pulumi.InputType['_root_inputs.TopLevelArgs']]] = None,
+                 thing: Optional[pulumi.Input[Union['_root_inputs.TopLevelArgs', '_root_inputs.TopLevelArgsDict']]] = None,
                  __props__=None):
         """
         Create a ModuleResource resource with the given unique name, props, and options.
@@ -68,7 +69,7 @@ class ModuleResource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 thing: Optional[pulumi.Input[pulumi.InputType['_root_inputs.TopLevelArgs']]] = None,
+                 thing: Optional[pulumi.Input[Union['_root_inputs.TopLevelArgs', '_root_inputs.TopLevelArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -109,3 +110,8 @@ class ModuleResource(pulumi.CustomResource):
     def thing(self) -> pulumi.Output[Optional['_root_outputs.TopLevel']]:
         return pulumi.get(self, "thing")
 
+
+ModuleResource(
+    "",
+    thing={}
+)
