@@ -6,6 +6,7 @@ dill~=0.3
 six~=1.12
 semver~=2.8
 pyyaml~=6.0
+typing_extensions~=4.1
 
 # Dev packages only needed during development.
 pylint==2.15.5

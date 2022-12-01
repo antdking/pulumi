@@ -206,7 +206,7 @@ func (mod *modContext) unqualifiedObjectTypeName(t *schema.ObjectType, input boo
 	return name
 }
 
-func (mod *modContext) objectType(t *schema.ObjectType, input bool) string {
+func (mod *modContext) objectType(t *schema.ObjectType, input bool, forDict bool) string {
 	var prefix string
 	if !input {
 		prefix = "outputs."
@@ -219,6 +219,9 @@ func (mod *modContext) objectType(t *schema.ObjectType, input bool) string {
 	}
 
 	modName, name := mod.tokenToModule(t.Token), mod.unqualifiedObjectTypeName(t, input)
+	if forDict {
+		name = fmt.Sprintf("%sDict", name)
+	}
 	if modName == "" && modName != mod.mod {
 		rootModName := "_root_outputs."
 		if input {
@@ -372,6 +375,7 @@ func (mod *modContext) genHeader(w io.Writer, needsSDK bool, imports imports) {
 		fmt.Fprintf(w, "import pulumi\n")
 		fmt.Fprintf(w, "import pulumi.runtime\n")
 		fmt.Fprintf(w, "from typing import Any, Mapping, Optional, Sequence, Union, overload\n")
+		fmt.Fprintf(w, "from typing_extensions import NotRequired, Required, TypedDict\n")
 		fmt.Fprintf(w, "from %s import _utilities\n", relImport)
 		for _, imp := range imports.strings() {
 			fmt.Fprintf(w, "%s\n", imp)
@@ -2248,6 +2252,16 @@ func (mod *modContext) genPropDocstring(w io.Writer, name string, prop *schema.P
 	}
 }
 
+func (mod *modContext) typeStringForDict(t schema.Type, input, acceptMapping bool) string {
+	var ty = mod.typeString(t, input, acceptMapping)
+	switch t.(type) {
+		case *schema.OptionalType:
+			return fmt.Sprintf("NotRequired[%s]", ty)
+		default:
+			return fmt.Sprintf("Required[%s]", ty)
+	}
+}
+
 func (mod *modContext) typeString(t schema.Type, input, acceptMapping bool) string {
 	switch t := t.(type) {
 	case *schema.OptionalType:
@@ -2265,9 +2279,12 @@ func (mod *modContext) typeString(t schema.Type, input, acceptMapping bool) stri
 	case *schema.MapType:
 		return fmt.Sprintf("Mapping[str, %s]", mod.typeString(t.ElementType, input, acceptMapping))
 	case *schema.ObjectType:
-		typ := mod.objectType(t, input)
+		typ := mod.objectType(t, input, false /*dictType*/)
 		if !acceptMapping {
 			return typ
+		}
+		if input {
+			return fmt.Sprintf("Union[%s, %s]", typ, mod.objectType(t, input, true /*dictType*/))
 		}
 		return fmt.Sprintf("pulumi.InputType[%s]", typ)
 	case *schema.ResourceType:
@@ -2404,6 +2421,11 @@ func InitParamName(name string) string {
 func (mod *modContext) genObjectType(w io.Writer, obj *schema.ObjectType, input bool) error {
 	name := mod.unqualifiedObjectTypeName(obj, input)
 	resourceOutputType := !input && mod.details(obj).resourceOutputType
+	if (input) {
+		if err := mod.genDictType(w, name, obj.Comment, obj.Properties); err != nil {
+			return err
+		}
+	}
 	return mod.genType(w, name, obj.Comment, obj.Properties, input, resourceOutputType)
 }
 
@@ -2545,6 +2567,38 @@ func (mod *modContext) genType(w io.Writer, name, comment string, properties []*
 	mod.genProperties(w, props, input /*setters*/, "", func(prop *schema.Property) string {
 		return mod.typeString(prop.Type, input, false /*acceptMapping*/)
 	})
+
+	fmt.Fprintf(w, "\n")
+	return nil
+}
+
+func (mod *modContext) genDictType(w io.Writer, name, comment string, properties []*schema.Property) error {
+// Sort required props first.
+	props := make([]*schema.Property, len(properties))
+	copy(props, properties)
+	sort.Slice(props, func(i, j int) bool {
+		pi, pj := props[i], props[j]
+		switch {
+		case pi.IsRequired() != pj.IsRequired():
+			return pi.IsRequired() && !pj.IsRequired()
+		default:
+			return pi.Name < pj.Name
+		}
+	})
+
+	var indent = "    "
+	name = pythonCase(name)
+	fmt.Fprintf(w, "class %sDict(TypedDict):\n", name)
+	if comment != "" {
+		printComment(w, comment, indent)
+	}
+
+	for _, prop := range props {
+
+		pname := PyName(prop.Name)
+		ty := mod.typeStringForDict(prop.Type, true /*input*/, false /*acceptMapping*/)
+		fmt.Fprintf(w, "%s%s: %s\n", indent, pname, ty)
+	}
 
 	fmt.Fprintf(w, "\n")
 	return nil

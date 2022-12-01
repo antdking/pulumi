@@ -49,6 +49,7 @@ setup(name='pulumi',
           'dill~=0.3',
           'six~=1.12',
           'semver~=2.8',
-          'pyyaml~=6.0'
+          'pyyaml~=6.0',
+          'typing_extensions~=4.1',
       ],
       zip_safe=False)
