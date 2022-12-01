@@ -19,7 +19,7 @@ class TypArgsDict(TypedDict):
     """
     A test for namespaces (mod 2)
     """
-    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgs']]]
+    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgsDict']]]
     val: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type

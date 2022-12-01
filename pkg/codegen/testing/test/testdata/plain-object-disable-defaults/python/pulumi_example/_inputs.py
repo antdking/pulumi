@@ -24,7 +24,7 @@ class HelmReleaseSettingsDict(TypedDict):
     """
     BETA FEATURE - Options to configure the Helm Release resource.
     """
-    required_arg: Required[str]
+    required_arg: str
     driver: NotRequired[Optional[str]]
     plugins_path: NotRequired[Optional[str]]
 
@@ -91,7 +91,7 @@ class HelmReleaseSettingsArgsDict(TypedDict):
     """
     BETA FEATURE - Options to configure the Helm Release resource.
     """
-    required_arg: Required[pulumi.Input[str]]
+    required_arg: pulumi.Input[str]
     driver: NotRequired[Optional[pulumi.Input[str]]]
     plugins_path: NotRequired[Optional[pulumi.Input[str]]]
 
@@ -160,7 +160,7 @@ class KubeClientSettingsArgsDict(TypedDict):
     """
     burst: NotRequired[Optional[pulumi.Input[int]]]
     qps: NotRequired[Optional[pulumi.Input[float]]]
-    rec_test: NotRequired[Optional[pulumi.Input['KubeClientSettingsArgs']]]
+    rec_test: NotRequired[Optional[pulumi.Input['KubeClientSettingsArgsDict']]]
 
 @pulumi.input_type
 class KubeClientSettingsArgs:
@@ -222,12 +222,12 @@ class LayeredTypeArgsDict(TypedDict):
     """
     Make sure that defaults propagate through types
     """
-    other: Required[pulumi.Input['HelmReleaseSettingsArgs']]
-    thinker: Required[pulumi.Input[str]]
+    other: pulumi.Input['HelmReleaseSettingsArgsDict']
+    thinker: pulumi.Input[str]
     answer: NotRequired[Optional[pulumi.Input[float]]]
-    plain_other: NotRequired[Optional['HelmReleaseSettingsArgs']]
+    plain_other: NotRequired[Optional['HelmReleaseSettingsArgsDict']]
     question: NotRequired[Optional[pulumi.Input[str]]]
-    recursive: NotRequired[Optional[pulumi.Input['LayeredTypeArgs']]]
+    recursive: NotRequired[Optional[pulumi.Input['LayeredTypeArgsDict']]]
 
 @pulumi.input_type
 class LayeredTypeArgs:
@@ -333,8 +333,8 @@ class TypArgsDict(TypedDict):
     """
     A test for namespaces (mod main)
     """
-    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgs']]]
-    mod2: NotRequired[Optional[pulumi.Input['_mod2.TypArgs']]]
+    mod1: NotRequired[Optional[pulumi.Input['_mod1.TypArgsDict']]]
+    mod2: NotRequired[Optional[pulumi.Input['_mod2.TypArgsDict']]]
     val: NotRequired[Optional[pulumi.Input[str]]]
 
 @pulumi.input_type

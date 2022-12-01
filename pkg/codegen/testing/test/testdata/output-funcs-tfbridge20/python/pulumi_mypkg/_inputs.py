@@ -15,8 +15,8 @@ __all__ = [
 ]
 
 class GetAmiIdsFilterArgsDict(TypedDict):
-    name: Required[str]
-    values: Required[Sequence[str]]
+    name: str
+    values: Sequence[str]
 
 @pulumi.input_type
 class GetAmiIdsFilterArgs:

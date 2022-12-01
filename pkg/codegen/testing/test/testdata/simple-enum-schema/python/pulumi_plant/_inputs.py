@@ -16,7 +16,7 @@ __all__ = [
 ]
 
 class ContainerArgsDict(TypedDict):
-    size: Required[pulumi.Input['ContainerSize']]
+    size: pulumi.Input['ContainerSize']
     brightness: NotRequired[Optional[pulumi.Input['ContainerBrightness']]]
     color: NotRequired[Optional[pulumi.Input[Union['ContainerColor', str]]]]
     material: NotRequired[Optional[pulumi.Input[str]]]

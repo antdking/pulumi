@@ -15,9 +15,9 @@ __all__ = [
 ]
 
 class FooArgsDict(TypedDict):
-    a: Required[bool]
-    c: Required[int]
-    e: Required[str]
+    a: bool
+    c: int
+    e: str
     b: NotRequired[Optional[bool]]
     d: NotRequired[Optional[int]]
     f: NotRequired[Optional[str]]

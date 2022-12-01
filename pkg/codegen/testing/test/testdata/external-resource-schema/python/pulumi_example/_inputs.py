@@ -16,9 +16,9 @@ __all__ = [
 ]
 
 class PetArgsDict(TypedDict):
-    required_name: Required[pulumi.Input['pulumi_random.RandomPet']]
-    required_name_array: Required[pulumi.Input[Sequence[pulumi.Input['pulumi_random.RandomPet']]]]
-    required_name_map: Required[pulumi.Input[Mapping[str, pulumi.Input['pulumi_random.RandomPet']]]]
+    required_name: pulumi.Input['pulumi_random.RandomPet']
+    required_name_array: pulumi.Input[Sequence[pulumi.Input['pulumi_random.RandomPet']]]
+    required_name_map: pulumi.Input[Mapping[str, pulumi.Input['pulumi_random.RandomPet']]]
     age: NotRequired[Optional[pulumi.Input[int]]]
     name: NotRequired[Optional[pulumi.Input['pulumi_random.RandomPet']]]
     name_array: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_random.RandomPet']]]]]

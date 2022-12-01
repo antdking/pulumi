@@ -18,7 +18,7 @@ class BastionShareableLinkDict(TypedDict):
     """
     Bastion Shareable Link.
     """
-    vm: Required[str]
+    vm: str
 
 @pulumi.input_type
 class BastionShareableLink:

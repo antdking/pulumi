@@ -23,8 +23,8 @@ class ConfigurationFiltersDict(TypedDict):
     """
     Configuration filters
     """
-    hierarchy_information: Required['HierarchyInformation']
-    filterable_property: NotRequired[Optional[Sequence['FilterableProperty']]]
+    hierarchy_information: 'HierarchyInformationDict'
+    filterable_property: NotRequired[Optional[Sequence['FilterablePropertyDict']]]
 
 @pulumi.input_type
 class ConfigurationFilters:
@@ -69,9 +69,9 @@ class CustomerSubscriptionDetailsDict(TypedDict):
     """
     Holds Customer subscription details. Clients can display available products to unregistered customers by explicitly passing subscription details
     """
-    quota_id: Required[str]
+    quota_id: str
     location_placement_id: NotRequired[Optional[str]]
-    registered_features: NotRequired[Optional[Sequence['CustomerSubscriptionRegisteredFeatures']]]
+    registered_features: NotRequired[Optional[Sequence['CustomerSubscriptionRegisteredFeaturesDict']]]
 
 @pulumi.input_type
 class CustomerSubscriptionDetails:
@@ -179,8 +179,8 @@ class FilterablePropertyDict(TypedDict):
     """
     Different types of filters supported and its values.
     """
-    supported_values: Required[Sequence[str]]
-    type: Required[Union[str, 'SupportedFilterTypes']]
+    supported_values: Sequence[str]
+    type: Union[str, 'SupportedFilterTypes']
 
 @pulumi.input_type
 class FilterableProperty:

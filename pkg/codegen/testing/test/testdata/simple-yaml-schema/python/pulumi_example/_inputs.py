@@ -40,7 +40,7 @@ class ConfigMapArgs:
 
 
 class ObjectWithNodeOptionalInputsArgsDict(TypedDict):
-    foo: Required[pulumi.Input[str]]
+    foo: pulumi.Input[str]
     bar: NotRequired[Optional[pulumi.Input[int]]]
 
 @pulumi.input_type
@@ -73,10 +73,10 @@ class ObjectWithNodeOptionalInputsArgs:
 
 class ObjectArgsDict(TypedDict):
     bar: NotRequired[Optional[pulumi.Input[str]]]
-    configs: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['ConfigMapArgs']]]]]
+    configs: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['ConfigMapArgsDict']]]]]
     foo: NotRequired[Optional[pulumi.Input['Resource']]]
-    others: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgs']]]]]]]
-    still_others: NotRequired[Optional[pulumi.Input[Mapping[str, pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgs']]]]]]]
+    others: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgsDict']]]]]]]
+    still_others: NotRequired[Optional[pulumi.Input[Mapping[str, pulumi.Input[Sequence[pulumi.Input['SomeOtherObjectArgsDict']]]]]]]
 
 @pulumi.input_type
 class ObjectArgs:
